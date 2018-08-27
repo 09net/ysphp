@@ -34,11 +34,11 @@ $langa=array('zh'=>['zh-hans','简体中文'],'cht'=>['zh-hant','繁體中文'],
 - 上线后请编辑 ys/YS.php 文件将define('DEBUG', true); 修改成define('DEBUG', false);并在管理后台关闭右下角调试窗口，可以极大的提高网站速度 。
 
 ###手机APP生成
-请用 hbuilder 将目录下的mui生成APP
+- 请用 hbuilder 将目录下的mui生成APP
 ###微信小程序
-请下载[yswxapp](https://github.com/09net/ysphp)
+- 请下载[yswxapp](https://github.com/09net/ysphp)
 ###官方示例
-目前唯一的官方示例是：**内涵gif笑话**  请扫描下方二维码进行效果查看
+- 目前唯一的官方示例是：**内涵gif笑话**  请扫描下方二维码进行效果查看
   
 
 
