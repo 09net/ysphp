@@ -14,12 +14,12 @@
 
 [TOC]
 
-## YSwxapp简介
+## YSphp简介
 
-> YSwxapp 是一种轻量级的微信小程序 
+> YSphp 是为中小企业及自媒体作者提供的轻量级网站程序，本程序调试简单，支持万国语言，生产效率极高。
   
 
-###上线前请修改
+###本程序需要顶级域名支持，对于采用IP访问的网站不友好
 utils\ util.js 
 ``` php
 var fid = 11;/*ysphp栏目id*/
@@ -29,13 +29,13 @@ var bucketcdn = "https://img.44api.com/upload/"/*您的图片及视频存放地�
 ```
 ##ysphp配置
 请登录http://  您的域名 /admin/op  点击微信小程序，填写APPID与APPsercret点击【保存配置】
-![配置](./ysphp.jpg)  
+
 ###参数获取
 APPID与APPsercret在微信公众平台获取    
-![配置](./mp.jpg)
+
 ###官方示例
 目前唯一的官方示例是：**内涵gif笑话**  请扫描下方二维码进行效果查看
-![二维码](./2wm.jpg)   
+  
 
 
 ## 关于收费
