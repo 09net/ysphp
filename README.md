@@ -30,8 +30,8 @@
 $langa=array('zh'=>['zh-hans','简体中文'],'cht'=>['zh-hant','繁體中文'],'en'=>['en','English'],'ja'=>['ja','日本の'],'ko'=>['ko','한국의'],'es'=>['es','español'],'ru'=>['ru','русский'],'ar'=>['ar','العربية'],'fr'=>['fr','français'],'hi'=>['hi','हिन्दी'],'pt'=>['pt','português'],'de'=>['de','Deutsch']);
 ```
 
-##ysphp配置
-请登录http://  您的域名 /admin/op  点击微信小程序，填写APPID与APPsercret点击【保存配置】
+##上线后的优化
+- 上线后请编辑 ys/YS.php 文件将define('DEBUG', true); 修改成define('DEBUG', false);并在管理后台关闭右下角调试窗口，可以极大的提高网站速度 。
 
 ###参数获取
 APPID与APPsercret在微信公众平台获取    
