@@ -20,13 +20,14 @@
   
 
 ###本程序需要顶级域名支持，对于采用IP访问的网站不友好
-utils\ util.js 
-``` php
-var fid = 11;/*ysphp栏目id*/
-var title = "内涵GIF笑话-每日签到有机会领千元红包";/*小程序分享标题*/
-var www = 'https://zh.44api.com/'/*您的网站域名*/
-var bucketcdn = "https://img.44api.com/upload/"/*您的图片及视频存放地址
-```
+- 本程序通过二级域名来生成不同语言版本
+- www.{顶级域名}  为语言选择
+- zh.{顶级域名}  为简体中文
+- cht.{顶级域名}  为繁体中文
+- en.{顶级域名}  为英文
+- 默认为12个语言区，如果您不需要开通这么多语言区请修改index.php
+
+
 ##ysphp配置
 请登录http://  您的域名 /admin/op  点击微信小程序，填写APPID与APPsercret点击【保存配置】
 
