@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>setting</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-pages {
+				top: 46px;
+				height: auto;
+			}
+			.mui-scroll-wrapper,
+			.mui-scroll {
+				background-color: #efeff4;
+			}
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			.mui-navbar {
+				position: fixed;
+				right: 0;
+				left: 0;
+				z-index: 10;
+				height: 44px;
+				background-color: #f7f7f8;
+			}
+			.mui-navbar .mui-bar {
+				position: absolute;
+				background: transparent;
+				text-align: center;
+			}
+			.mui-android .mui-navbar-inner.mui-navbar-left {
+				opacity: 0;
+			}
+			.mui-ios .mui-navbar-left .mui-left,
+			.mui-ios .mui-navbar-left .mui-center,
+			.mui-ios .mui-navbar-left .mui-right {
+				opacity: 0;
+			}
+			.mui-navbar .mui-btn-nav {
+				-webkit-transition: none;
+				transition: none;
+				-webkit-transition-duration: .0s;
+				transition-duration: .0s;
+			}
+			.mui-navbar .mui-bar .mui-title {
+				display: inline-block;
+				width: auto;
+			}
+			.mui-page-shadow {
+				position: absolute;
+				right: 100%;
+				top: 0;
+				width: 16px;
+				height: 100%;
+				z-index: -1;
+				content: '';
+			}
+			.mui-page-shadow {
+				background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+				background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+			}
+			.mui-navbar-inner.mui-transitioning,
+			.mui-navbar-inner .mui-transitioning {
+				-webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+				transition: opacity 300ms ease, transform 300ms ease;
+			}
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;
+			}
+			.mui-page .mui-table-view:last-child {
+				margin-bottom: 30px;
+			}
+			.mui-table-view {
+				margin-top: 20px;
+			}
+			
+			.mui-table-view span.mui-pull-right {
+				color: #999;
+			}
+			.mui-table-view-divider {
+				background-color: #efeff4;
+				font-size: 14px;
+			}
+			.mui-table-view-divider:before,
+			.mui-table-view-divider:after {
+				height: 0;
+			}
+			.head {
+				height: 40px;
+			}
+			#head {
+				line-height: 40px;
+			}
+			.head-img {
+				width: 40px;
+				height: 40px;
+			}
+			#head-img1 {
+				position: absolute;
+				bottom: 10px;
+				right: 40px;
+				width: 40px;
+				height: 40px;
+			}
+			.update {
+				font-style: normal;
+				color: #999999;
+				margin-right: -25px;
+				font-size: 15px
+			}
+			.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-ios .mui-navbar .mui-bar .mui-title {
+				position: static;
+			}
+			/*问题反馈在setting页面单独的css*/
+			#feedback .mui-popover{
+				position: fixed;
+			}
+			#feedback .mui-table-view:last-child {
+			    margin-bottom: 0px;
+			}
+			#feedback .mui-table-view:first-child {
+			    margin-top: 0px;
+			}
+			
+			.mui-plus.mui-plus-stream .mui-stream-hidden{
+				display: none !important;
+			}
+			.hy-box{background-color:#FFFFFF; padding:10px;}
+			 .mui-input-row{margin:5px; padding:10px;}
+			/*问题反馈在setting页面单独的css==end*/
+			
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/feedback.css" />
+		 <script src="js/angular.min.js"></script>
+	</head>
+
+	<body class="mui-fullscreen" ng-app="myApp" ng-controller="mynav">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="setting" class="mui-page">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-center mui-title">YSV8.com</h1>
+			</div>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell mui-media">
+								<a class="mui-navigate-right" href="#account">
+									<img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+									<div class="mui-media-body">
+									<span id="username"></span>
+										<p class='mui-ellipsis'>G:<span id="user_gold" class="red">100</span>&nbsp;C:<span id="user_vip" class="red"></span></p>
+									</div>
+								</a>
+							</li>
+						</ul>
+						
+						<ul class="mui-table-view mui-table-view-chevron" id="my">
+			
+		
+							<li class="mui-table-view-cell">
+<a herf="fav.html?q=fav"><span class="mui-tab-label">{{l[lang]['收藏']}}</span></a></li><li class="mui-table-view-cell"><a herf="fav.html?q=look"><span class="mui-tab-label">{{l[lang]['历史']}}</span></a>
+    
+        </li>
+<li class="mui-table-view-cell"><a  herf="fav.html?q=com"><span class="mui-tab-label">{{l[lang]['评论']}}</span></a></li><li class="mui-table-view-cell"><a  herf="mx.html"><span class="mui-tab-label">{{l[lang]['明细']}}</span></a></li><li class="mui-table-view-cell"><a herf="chat.html"><span class="mui-tab-label">{{l[lang]['信息']}}</span>&nbsp;<span id="usermess" class="red"></span></a>
+</li>
+<li class="mui-table-view-cell"><a  herf="guide.html"><span class="mui-tab-label">{{l[lang]['语言']}}</span></a></li>
+
+
+			
+			
+			
+			
+						</ul>
+						
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right">{{l[lang]['账户']}}</a>
+							</li>
+					
+							
+						
+			
+							<li class="mui-table-view-cell">
+								<a href="#about" class="mui-navigate-right">{{l[lang]['关于']}}</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view" id="mui-reglogin">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--页面主内容区结束-->
+		</div>
+		<!--单页面结束-->
+		<div id="account" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">{{l[lang]['账户']}}</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a id="head" class="mui-navigate-right">{{l[lang]['头像']}}
+								<span class="mui-pull-right head">
+									<img class="head-img mui-action-preview" id="head-img1" src=""/>
+								</span>
+							</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>{{l[lang]['账户']}}<span class="mui-pull-right"><span id="username1"></span></span></a>
+							</li>
+						</ul>
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a id="goodlike">{{l[lang]['积分']}}<span class="mui-pull-right" id="user_credits"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a id="jinshen">{{l[lang]['等级']}}<span class="mui-pull-right"  id="user_group"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>{{l[lang]['电子邮箱']}}<span class="mui-pull-right" id="user_email"></span></a>
+							</li>
+							
+							<li class="mui-table-view-cell">
+								<a id="zzgg" class="red">{{l[lang]['自助广告']}}<span class="mui-pull-right" class="red">NEW</span></a>
+							</li>
+							
+							
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div id="general" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">{{l[lang]['通用']}}</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a id="welcome" class="mui-navigate-right">{{l[lang]['语言']}}</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="about" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">{{l[lang]['关于']}}</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view" id="shejiao">
+							
+							<li class="mui-table-view-cell"><a herf="mailto:zxiaoyun34@gmail.com">E-MAIL:zxiaoyun34@gmail.com</a></li>
+							<li class="mui-table-view-cell"><a herf="https://www.facebook.com/profile.php?id=100025350199994">FACEBOOK:张小芸</a></li>
+							<li class="mui-table-view-cell"><a herf="https://twitter.com/zxiaoyun34">TWITTER:zhangxiaoyun</a></li>
+							<li class="mui-table-view-cell"><a herf="https://plus.google.com/105617486442995852256">GOOGLE+:xiaoyun zhang</a></li>
+							<li class="mui-table-view-cell"><a herf="tel:+8615973827429">TEL:+86 15973827429</a></li>
+						    <li id="check_update" class="mui-table-view-cell mui-plus-visible"><a id="update" class="mui-navigate-right">{{l[lang]['更新']}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+
+
+
+<div id="logindiv" class="mui-popover mui-popover-bottom mui-popover-action">
+<div class="hy-box" style="font-size: 16px;">
+<form class="mui-input-group">
+<div class="mui-input-row"><label>{{l[lang]['账户']}}</label><input id='user' type="text" class="mui-input" placeholder="{{l[lang]['账户']}}"></div>
+<div class="mui-input-row"><label>{{l[lang]['密码']}}</label><input id='pass1' type="password" class="mui-input" placeholder="{{l[lang]['密码']}}"></div>
+<div class="mui-input-row" id="pass2d"><label>{{l[lang]['重复密码']}}</label><input id='pass2' type="password" class="mui-input" placeholder="{{l[lang]['重复密码']}}"></div>	
+<div class="mui-input-row" id="emaild"><label>{{l[lang]['电子邮箱']}}</label><input id='email' type="text" class="mui-input" placeholder="{{l[lang]['电子邮箱']}}"></div>	
+</form>		
+<div class="mui-content-padded"><button id='login' class="mui-btn mui-btn-block mui-btn-primary">{{l[lang]['登录']}}</button><a id='add'>{{l[lang]['注册']}}</a></div>
+</div>
+</div>	
+</div>
+	</body>
+	<script src="config.js"></script>
+	<script src="js/mui.min.js "></script>
+	<script src="js/mui.view.js "></script>
+	<script src="js/mui.enterfocus.js"></script>
+	<script type="text/javascript">
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+</script>
+
+	<script src='js/setting.js'></script>
+	
+</html>

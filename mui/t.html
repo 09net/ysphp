@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><head>
+ <meta charset="utf-8">
+ <title>...</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/mui.min.css">
+<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+<link rel="stylesheet" type="text/css" href="css/t.css" />
+<link rel="stylesheet" type="text/css" href="css/alert.css" />
+<script src="js/angular.min.js"></script>
+</head><body ng-app="myApp" ng-controller="mynav">
+<header id="header" class="mui-bar mui-bar-nav">
+ <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+<h1 class="mui-title" id="title" style="height:45px;">...</h1></header>
+<div class="vs" id="vs"></div>
+<div class="content" id="content"></div>
+<div class="topdata" id="topdata"></div>
+<div id="pullrefresh" style="margin-bottom:60px; padding:0px;"><ul class="pullrefresh-view mui-table-view mui-table-view-chevron" id="mui-table-view"></ul></div>
+<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action"><div class="hy-box" style="font-size: 16px;">
+<div class="input-box">
+<label style="font-weight: bold;font-size: 1.4rem;"><a href="javascript:void(0)" onClick="mui('#sheet1').popover('toggle')">{{l[lang]['关闭']}}</a><span id="aid"></span></label>
+</div>
+<p><textarea id="content2" class="publisher_textarea" onKeyUp="autoGrow(this);"></textarea></p><p class="pl-input-box"><button type="button" id="post_post" class="mui-btn mui-btn-primary mui-btn-outlined">{{l[lang]['发送']}}</button></p>
+
+</div></div>
+ <nav class="mui-bar mui-bar-tab">
+ <div class="mui-row">
+ <div class="mui-col-sm-6 mui-col-xs-6">
+ <button type="button" style="border-radius: 15px;width:98%; margin-top:10px" class="red">{{l[lang]['评论']}}</button>
+ </div>
+ <div class="mui-col-sm-2 mui-col-xs-2">
+ <span class="mui-icon mui-icon-chatbubble" id="posts2"></span><span id="posts"></span>
+ </div>
+ <div class="mui-col-sm-2 mui-col-xs-2">
+ <span class="mui-icon mui-icon-star" id="fav"></span>
+ </div>
+ <div class="mui-col-sm-2 mui-col-xs-2">
+<span class="mui-icon mui-icon-redo" id="share"></span>
+ </div>
+</div>
+</nav>
+
+<div id="plpost" class="mui-popover mui-popover-bottom mui-popover-action ">
+<ul class="pullrefresh-view mui-table-view mui-table-view-chevron" id="pldiv" style="text-align:left"></ul>
+<ul class="mui-table-view">
+<li class="mui-table-view-cell"><a id="jiazai"><b>{{l[lang]['加载']}}</b></a></li>
+<li class="mui-table-view-cell"><a href="#plpost"><b>{{l[lang]['取消']}}</b></a></li>
+</ul>
+</div>
+<div id="fy_list" class="mui-popover mui-popover-bottom mui-popover-action ">
+<ul class="mui-table-view">
+<li class="mui-table-view-cell"><a id="copy"><b>{{l[lang]['复制']}}</b></a></li>
+<li class="mui-table-view-cell"><a id="fy_now"><b>{{l[lang]['翻译']}}</b></a></li>
+<li class="mui-table-view-cell"><a href="javascript:void(0)" onClick="mui('#fy_list').popover('toggle')"><b>{{l[lang]['取消']}}</b></a></li>
+</ul>
+</div>
+
+<div id="share_list" class="mui-popover mui-popover-bottom mui-popover-action ">
+<ul class="mui-table-view">
+<li class="mui-table-view-cell"><a id="facebook">facebook</a></li>
+<li class="mui-table-view-cell"><a id="twitter">twitter</a></li>
+<li class="mui-table-view-cell"><a id="google">google+</a></li>
+<li class="mui-table-view-cell"><a id="weibo">weibo</a></li> 
+</ul>
+<ul class="mui-table-view">
+<li class="mui-table-view-cell"><a href="#sheet1"><b>{{l[lang]['取消']}}</b></a></li>
+</ul>
+</div>
+<script src="js/mui.min.js"></script>
+<script src="config.js"></script>
+<script src="js/sweet-alert.min.js"></script>
+<script src="js/mui.zoom.js"></script>
+<script src="js/mui.previewimage.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+</script>
+ <script src="js/t.js"></script></body></html>

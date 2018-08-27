@@ -1,0 +1,2 @@
+<div class="postc"><a href="/u/<?php echo urlencode($v['user']);?>.html" class="avatar" target="_blank">{$v['user']}</a>&nbsp;{php echo humandate($v['atime'])} 
+<div class="postcc">{$v.content}</div></div>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <title>fav</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/mui.min.css">
+<style type="text/css">
+#list {margin-top: -1px;}
+   .mui-bar .mui-pull-left .mui-icon {
+    padding-right: 5px;
+    font-size: 28px;
+   }
+   .mui-bar .mui-btn {
+    font-weight: normal;
+    font-size: 17px;
+   }
+   .mui-bar .mui-btn-link {
+    top: 1px;
+   }
+   .mui-scroll { height: 28px; line-height: 28px; overflow: hidden;}
+   .mui-scroll a{padding: 5px;}
+   .red{color:#FF0000}
+   .no{ background-color:#FFFFFF}
+   .lititle{line-height:24px;  font-weight:bold; font-size:14px;overflow:visible}
+   .liimg{width:80px; height:80px;}
+   #pullrefresh{ padding-bottom:60px;}
+   .modetext{color:#FF0000;;border: thin solid #FF0000; margin-right:20px;}
+   .mui-scroll-wrapper{background-color:#FFFFFF;}
+   video{height:180px;}
+  
+
+</style>
+ </head>
+  <script src="js/angular.min.js"></script>
+ <body>
+
+<header id="header" class="mui-bar mui-bar-nav">
+<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+<h1 class="mui-title">ysv8.com</h1>
+</header>
+<div class="mui-content" ng-app="myApp" ng-controller="mynav">
+<div class="mui-row" id="setbar">
+        <div class="mui-col-sm-4 mui-col-xs-4">
+                <a class="mui-control-item" id="fav" style="width:100%;display:block">{{l[lang]['收藏']}}</a>
+        </div>
+        <div class="mui-col-sm-4 mui-col-xs-4">
+           <a class="mui-control-item" id="look"  style="width:100%;display:block">{{l[lang]['历史']}}</a>
+        </div>
+           <div class="mui-col-sm-4 mui-col-xs-4">
+           <a class="mui-control-item" id="com"  style="width:100%;display:block">{{l[lang]['评论']}}</a>
+        </div>
+    </div>
+
+
+
+ <div id="pullrefresh" class="mui-scroll-wrapper" style="top:90px;"><ul class="pullrefresh-view mui-table-view mui-table-view-chevron" id="mui-table-view"></ul></div> 
+ </div>
+ </div>
+<script src="js/mui.min.js"></script>
+<script src="config.js"></script>
+<script>
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+var modetext=['文本','图片','资源','视频','问答']; 
+var datalook=[];/*查看*/
+var datafav=[];/*收藏*/
+var datacom=[];/*评论*/
+var key=getQueryString("q")
+var posttype=getQueryString('posttype');
+if(posttype==null){posttype='forum_get';}
+
+if(posttype=='weibo_get'){
+var optionss=localStorage.getItem("datalook_w"); 
+if(optionss){datalook=JSON.parse(optionss);}
+var optionss=localStorage.getItem("datafav_w"); 
+if(optionss){datafav=JSON.parse(optionss);}
+var optionss=localStorage.getItem("datacom_w"); 
+if(optionss){datacom=JSON.parse(optionss);}
+}else{
+
+var optionss=localStorage.getItem("datalook"); 
+if(optionss){datalook=JSON.parse(optionss);}
+var optionss=localStorage.getItem("datafav"); 
+if(optionss){datafav=JSON.parse(optionss);}
+var optionss=localStorage.getItem("datacom"); 
+if(optionss){datacom=JSON.parse(optionss);}
+
+}
+function rediv(){
+document.getElementById('fav').setAttribute('class',"mui-control-item");
+document.getElementById('com').setAttribute('class',"mui-control-item");
+document.getElementById('look').setAttribute('class',"mui-control-item");
+
+}
+function start(){
+rediv();
+dataa=[];
+if(key=='fav'){
+data=datafav;
+document.getElementById('fav').setAttribute('class',"mui-control-item red_botton");
+}else if(key=='com'){
+data=datacom;
+document.getElementById('com').setAttribute('class',"mui-control-item red_botton");
+}else{
+data=datalook;
+document.getElementById('look').setAttribute('class',"mui-control-item red_botton");
+}
+var table = document.body.querySelector('.pullrefresh-view');
+if(data.length<1){
+ var li = document.createElement('li');
+      li.className = 'mui-table-view-cell';
+      li.innerHTML = l[lang]['空'];
+      table.appendChild(li);
+}else{
+  for (i = data.length-1;i >-1; i--) {
+  sethtml2(data[i],table,0,'up')
+  }
+  }
+}
+function restart(){
+var div = document.getElementById("mui-table-view");  
+while(div.hasChildNodes()){  div.removeChild(div.firstChild);  }  
+ajaxbool=false;
+start();
+}
+mui("#pullrefresh").on('tap','a',function(){
+   id = this.getAttribute("herf");
+   mode = this.getAttribute("data-mode");
+  mui.openWindow({
+    url: mode+'.html?id='+id, 
+    id:'id'
+  });
+});
+
+mui("#setbar").on('tap','.mui-control-item',function(){
+key = this.getAttribute("id");
+restart();
+});
+
+
+(function($){
+var deceleration = mui.os.ios?0.003:0.0009;
+$('.mui-scroll-wrapper').scroll({
+bounce: false,
+indicators: true,
+deceleration:deceleration
+});
+   $.ready(function() {
+    setTimeout(function() {start();},500);
+});  
+})(mui);    
+  </script>
+ </body>
+
+</html>

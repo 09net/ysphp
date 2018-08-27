@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+ <head>
+ <meta charset="utf-8">
+ <title>search</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <meta name="apple-mobile-web-app-status-bar-style" content="black">
+ <link rel="stylesheet" href="css/mui.min.css">
+ <link rel="stylesheet" href="css/index.css">
+ <link rel="stylesheet" type="text/css" href="css/alert.css" />
+<style type="text/css">b{ color:#FF0000}</style>
+ </head>
+ <body>
+ <header class="mui-bar mui-bar-nav">
+<form action="s.html" onSubmit="return ssub();">
+<div class="mui-row" id="indexheader">
+<div class="mui-col-sm-2 mui-col-xs-2" id="user"><a herf="my.html" id="my"><img src="images/mori.png" /></a></div>
+<div class="mui-col-sm-8 mui-col-xs-8">
+<div class="mui-input-row mui-search">
+<input type="search" class="mui-input-clear" placeholder="" id="sreach">
+</div>
+</div>
+<div class="mui-col-sm-2 mui-col-xs-2" id="post"><span class="mui-icon mui-icon-compose"></span></div>
+</div>
+</form>
+</header>
+ <div class="mui-content">
+ <div id="slider" class="mui-slider mui-fullscreen">
+ <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+<div class="mui-scroll" id="group">
+
+</div>
+</div>
+<div class="mui-slider-group" style="padding-bottom:60px;">
+
+</div>
+</div>
+</div>
+<script src="config.js"></script>
+<script>
+var ustr=''
+var ustrbool=false;
+var key=getQueryString("q")
+var mode=getQueryString("mode");
+var page=getQueryString("page");
+var forumlid=getQueryString("forumlid");
+document.getElementById('sreach').value=key;
+var group=[{name:l[lang]['综合'],id:0,size:3},{name:l[lang]['图片'],id:1,size:1},{name:l[lang]['附件'],id:2,size:1},{name:l[lang]['视频'],id:3,size:1}];
+wgroup(group);
+posttype='forum_get';
+</script>
+<script src="js/mui.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/sweet-alert.min.js"></script>
+<script src="js/autosize.min.js"></script>
+<script src="js/mui.pullToRefresh.js"></script>
+<script src="js/mui.pullToRefresh.material.js"></script>
+<script>
+mui.init();
+function sreachsub2(){
+var ustr=''
+var ustrbool=false;
+key=document.getElementById('sreach').value
+mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+div=pullRefreshEl.querySelector('.mui-table-view');
+while(div.hasChildNodes()){ div.removeChild(div.firstChild); } 
+pullRefreshEl.style.transform="translate3d(0px, 0px, 0px)";
+});
+dataa = []; 
+ ajaxbool=false;
+setTimeout(function() {getdowndata('no',document.getElementById('ms'+slideNumber).getAttribute("did"),document.getElementById('mv'+slideNumber));}, 500);
+}
+function getdowndata(self,id,table){
+if(ajaxbool){if(typeof(self)=="object"){self.endPullDownToRefresh();}return;}
+ajaxbool=true;
+mui.get(www+'search.api',{q:key,mode:id,fid:forumlid,pageid:0},function(data2){ 
+loadi=0;
+loadni=0;
+
+var data=data2['data'];
+if(data){
+ for (i = 0;i < data.length; i++) {
+sethtml(data[i],table,id,'down')
+
+ 
+}
+}
+var forum_list=data2['forum_list'];
+var user_list=data2['user_list'];
+
+if(ustrbool==false){ 
+ for (i = 0;i < forum_list.length; i++) {
+ustrbool=true 
+ustr+='<div class="mui-col-sm-3 mui-col-xs-6"><img class="mui-media-object mui-pull-left" src="'+imgcdn+forum_list[i]['avatar']+'_80" style="border-radius:30px; margin:5px;width:50px; height:50px;><div class="mui-media-body"><a her="lo.html" id="'+forum_list[i]['id']+'" posttype="f" class="lo">'+forum_list[i]['name']+'</a></div>';
+ }
+ for (i = 0;i < user_list.length; i++) {
+ ustrbool=true 
+ ustr+='<div class="mui-col-sm-3 mui-col-xs-6"><img class="mui-media-object mui-pull-left" src="'+imgcdn+user_list[i]['avatar']+'_80" style="border-radius:30px; margin:5px;width:50px; height:50px;><div class="mui-media-body"><a her="lo.html" id="'+user_list[i]['user']+'" posttype="u" class="lo">'+user_list[i]['user']+'</a></div>';
+ 
+ }
+ var li = document.createElement('div');
+      li.className = 'mui-table-view-cell mui-media';
+      li.innerHTML = '<div class="mui-row">'+ustr+'</div>';
+	  table.insertBefore(li, table.firstChild);
+
+} 
+ 
+
+page=1;
+if(typeof(self)=="object"){ 
+ if(loadi<10){
+self.endPullDownToRefresh(); 
+var li = document.createElement('li');
+ li.className = 'mui-table-view-cell mui-media';
+ li.innerHTML = '<p style="text-align:center">'+l[lang]['完毕']+'</p>';
+ table.appendChild(li);
+}else{
+self.endPullDownToRefresh(); 
+ } 
+ } 
+mui.toast(l[lang]['更新']+' +'+(loadni),{ duration:'short', type:'div' });
+ ajaxbool=false
+ },'json'
+);
+
+}
+function getupdata(self,id,table){
+if(ajaxbool){self.endPullUpToRefresh(false);return;}
+ ajaxbool=true;
+mui.get(www+'search.api',{q:key,mode:id,fid:forumlid,pageid:page},function(data2){ 
+loadi=0;
+loadni=0;
+wbi=0;
+wbni=0;
+
+
+
+var data=data2['data'];
+if(data){
+ for (i = 0;i < data.length; i++) {
+sethtml(data[i],table,id,'up')
+
+ 
+}
+}
+
+
+
+page=Number(data2['page'])+1;
+mui.toast(l[lang]['加载']+' +'+(loadi),{ duration:'short', type:'div' });
+if(loadi<9){
+self.endPullUpToRefresh(true); 
+var li = document.createElement('li');
+ li.className = 'mui-table-view-cell mui-media';
+ li.innerHTML = '<p style="text-align:center">'+l[lang]['完毕']+'</p>';
+ table.appendChild(li);
+}else{
+self.endPullUpToRefresh(false);
+ }
+ ajaxbool=false
+ },'json'
+);
+}
+var deceleration = mui.os.ios?0.003:0.0009;
+var slideNumber=0;
+(function($) {
+$('.mui-scroll-wrapper').scroll({
+bounce: false,
+indicators: true,
+deceleration:deceleration
+});
+$.ready(function() {
+$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+var selfid=pullRefreshEl.getAttribute("did");
+$(pullRefreshEl).pullToRefresh({
+down: {
+callback: function() {
+var self = this;
+setTimeout(function() {
+getdowndata(self,selfid,self.element.querySelector('.mui-table-view'));
+  }, 1000);
+ }
+ },
+ up: {
+ contentrefresh: '.....',
+ callback: function() {
+  var self = this;
+  setTimeout(function() {
+  getupdata(self,selfid,self.element.querySelector('.mui-table-view'));
+  }, 1000);
+ }
+ }
+ });
+/*幻灯片事件*/ 
+document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+if(slideNumber!=event.detail.slideNumber){
+ ajaxbool=false;
+ page=0;
+getdowndata('no',document.getElementById('ms'+event.detail.slideNumber).getAttribute("did"),document.getElementById('mv'+event.detail.slideNumber));
+slideNumber=event.detail.slideNumber;
+}
+
+});
+
+/*A*/ 
+mui(".mui-slider-group").on('tap','a',function(){
+ id = this.getAttribute("herf");
+  size = this.getAttribute("data-size");
+ if(size=='gs'){openurl('open.html?q='+encodeURI(id),'gs'); return true;}
+ mui.openWindow({
+ url: 't.html?id='+id, 
+ id:'id'
+ });
+});
+
+mui("#user").on("tap","a",function(){openurl('setting.html','setting');});
+mui("#post").on("tap","span",function(){openurl('post.html','post');});
+/*搜索提交*/
+ssub=function(){
+if(key!=document.getElementById('sreach').value){
+sreachsub2();
+ }
+ return false;
+}
+/*搜索按钮*/
+mui(".mui-row").on('tap','.mui-search',function(){
+var gethtml=ssub();
+}); 
+ajaxbool=false;
+page=0;
+setTimeout(function() {getdowndata('no',document.getElementById('ms0').getAttribute("did"),document.getElementById('mv0'));}, 500);
+});
+});
+})(mui);
+
+
+</script></body></html>

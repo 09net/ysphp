@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="css/mui.min.css">
+
+  <style type="text/css">
+   #list {
+    /*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+    margin-top: -1px;
+   }
+   .mui-bar .mui-pull-left .mui-icon {
+    padding-right: 5px;
+    font-size: 28px;
+   }
+   .mui-bar .mui-btn {
+    font-weight: normal;
+    font-size: 17px;
+   }
+   .mui-bar .mui-btn-link {
+    top: 1px;
+   }
+   .mui-scroll { height: 28px; line-height: 28px; overflow: hidden;}
+   .mui-scroll a{padding: 5px;}
+   .red{
+	color:#FF0000;
+}
+   .no{ background-color:#FFFFFF}
+   .mui-content-padded {
+				margin-top: 25px;
+			}
+			 .hy-box{background-color:#FFFFFF; padding:10px;}
+			 .mui-input-row{margin:5px; padding:10px;}
+  </style>
+  <script src="js/angular.min.js"></script>
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+ </head>
+
+ <body  ng-app="myApp" ng-controller="mynav">
+<header id="header" class="mui-bar mui-bar-nav">
+  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+   <h1 class="mui-title" id="mui-title">{{l[lang]['充值']}}</h1>
+</header>
+<div class="mui-content" style="background-color:#FFFFFF">
+<input name="title" type="hidden" value="{{l[lang]['充值']}}(ysv8.com)">
+<input name="uid" id="uid" type="hidden" value="0">
+<div class="mui-input-row"><label>{{l[lang]['账户']}}</label><input name="user" id="user" type="text" value="" disabled="disabled"></div>
+<div class="mui-input-row"><label>{{l[lang]['数量']}}</label><input name="gold" type="text" id="gold" class="mui-input" value="100" style="border: thin solid #CCCCCC;" onChange="rmbc(this)"></div>
+<div class="mui-input-row"><label>{{l[lang]['金额']}}</label><span class="red" id="rmb">$100</span></div>
+<div style="text-align:center; padding:10px;"><div  class="mui-btn mui-btn-primary" id="paypal-button"></div></div>
+</div>	
+<script src="js/mui.min.js"></script>
+<script src="config.js"></script>	
+<script>
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+var url=getQueryString("q")
+if(url!= null){
+document.getElementById('url').value=url;
+}
+var loginButton = document.getElementById('loginb');
+var regid='login';
+var islogin=false;
+function rmbc(obj){
+document.getElementById("rmb").innerHTML='$'+obj.value;
+}
+
+function setdata(data){
+if(data['error']){
+muialert(data);
+}else{
+islogin=true;
+document.getElementById('user').value=data['my'][0]['user'];
+document.getElementById('uid').value=data['my'][0]['id'];
+}
+
+}
+
+
+(function($) {
+$.ready(function() {
+setTimeout(function() {mui.post(www+'open/user',{type:'get',YSV8_HEX:ysv8hex},function(data){setdata(data);});}, 500);
+  });
+})(mui);  
+  </script>
+  
+   <script>
+  var CREATE_PAYMENT_URL  = www+'paypal/create';
+    var EXECUTE_PAYMENT_URL = www+'paypal/execute';
+    paypal.Button.render({
+      env: 'production', // Or 'sandbox',production
+      commit: true, // Show a 'Pay Now' button
+      style: {
+            layout: 'vertical',  // horizontal | vertical
+            size:   'medium',    // medium | large | responsive
+            shape:  'rect',      // pill | rect
+            color:  'gold'       // gold | blue | silver | black
+        },
+
+      payment: function(data, actions) {/*点击付款*/
+        return paypal.request.post(CREATE_PAYMENT_URL,{title:'Recharge(ysv8.com)',uid:document.getElementById('uid').value,num:document.getElementById('gold').value}).then(function(data) {
+		if(data.error){mui.alert(data.info);}
+                return data.id;
+            });
+      },
+
+      onAuthorize: function(data, actions) {/*完成付款*/
+       return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                paymentID: data.paymentID,
+                payerID:   data.payerID
+            }).then(function() {
+
+                   mui.alert(l[lang]['成功']);
+            });
+      },
+
+      onCancel: function(data, actions) {/*取消付款*/
+     mui.alert(l[lang]['取消']);
+      },
+
+      onError: function(err) {/*付款错误*/
+    // mui.alert(l[lang]['失败']);
+      }
+    }, '#paypal-button');
+  </script>
+  
+  
+ </body>
+
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" class="feedback">
+ <head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+ <title>posts</title>
+ <link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+ <link rel="stylesheet" type="text/css" href="css/feedback.css" />
+ <link href="css/mui.picker.css" rel="stylesheet" />
+ <link href="css/mui.poppicker.css" rel="stylesheet" />
+ <link rel="stylesheet" type="text/css" href="css/alert.css" />
+ <script src="js/angular.min.js"></script>
+  <style>.red{color:#FF0000}</style>
+ </head>
+
+ <body ng-app="myApp" ng-controller="mynav">
+ <header class="mui-bar mui-bar-nav">
+  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  <button type="button" id="submit" class="mui-btn mui-btn-danger mui-pull-right" data-loading-icon="">{{l[lang]['发送']}}</button>
+  <h1 class="mui-title">{{l[lang]['投稿']}}</h1>
+ </header>
+ <div class="mui-content">
+   <div class="mui-collapse-content">
+    <form class="mui-input-group">
+    <div class="mui-input-row"> 
+     <input type="text" id="title" placeholder="{{l[lang]['标题']}}">
+    </div>
+
+<div class="mui-row"><div class="mui-col-sm-6 mui-col-xs-6"><button id='showUserPicker' class="mui-btn mui-btn-block" type='button'>{{l[lang]['小组']}}</button></div><div class="mui-col-sm-6 mui-col-xs-6"><button id='showUserPicker2' class="mui-btn mui-btn-block" type='button'>{{l[lang]['悬赏']}}</button></div></div>
+    </form>
+   </div>
+  
+  <div class="mui-content-padded">
+  <div class="mui-inline">{{l[lang]['内容']}}(<span class="red">{{l[lang]['必填']}}</span>)</div>
+  
+   </div>
+  <div class="row mui-input-row">
+  
+  <textarea id='question' class="mui-input-clear question" placeholder="{{l[lang]['内容']}}" onKeyUp="autoGrow(this);"></textarea>
+  </div><input id="fid" type="hidden" value="0">
+  <input id="gold" type="hidden" value="">
+ <input name="imgv" type="hidden" id="imgv" value="" /><input name="vidv" id="vidv" type="hidden" value="" /><input name="files" id="files" type="hidden" value="" />
+
+  <div style="" id="upload">
+ <label for="fileToUpload" class="hy-editor-btn" ><img src="img/image.png"></label>
+ <label for="fileTovUpload" class="hy-editor-btn" ><img src="img/video.png" ></label>
+ <input type="file" name="fileToUpload" id="fileToUpload" onChange="fileSelected('upload','fileToUpload');" style="display: none;">
+		 <input type="file" name="fileTovUpload" id="fileTovUpload" onChange="fileSelected('uploadfiles','fileTovUpload');" style="display: none;">
+		  <div id="img"></div>
+ </div>
+</div>
+
+ 
+  </div>
+ </div>
+ <script src="js/mui.min.js"></script>
+ <script src="config.js"></script>
+ <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/sweet-alert.min.js"></script>
+  <script src="js/upload.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/mui.picker.min.js"></script>
+  <script src="js/mui.poppicker.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+ var sdata=[];
+ function setdata(data){
+if(data['error']){
+muialert(data);
+ return false;
+ }
+
+ 
+
+
+for (i = 0;i < data['forum'].length; i++) {
+sdata.push({
+value:data['forum'][i]['id'],
+text:data['forum'][i]['name'],
+});
+
+}
+
+if(sdata.length==0){
+mui.alert(l[lang]['空'],l[lang]['警告'],l[lang]['确认'],function(data){
+ mui.openWindow({
+  url: 'more.html', 
+  id:'more.html'
+ });});
+  return false;
+}
+var showUserPicker2 = new mui.PopPicker();
+var userPicker2 = new mui.PopPicker();
+userPicker2.setData([
+{value:0,text:l[lang]['空']},
+{value:100,text:'G100'},
+{value:500,text:'G500'},
+{value:1000,text:'G1000'},
+]);
+var showUserPickerButton2 = document.getElementById('showUserPicker2');
+   var userResult2 = document.getElementById('gold');
+ showUserPickerButton2.addEventListener('tap', function(event) {
+   userPicker2.show(function(items) {
+    userResult2.value = items[0].value;
+    showUserPickerButton2.innerText=items[0].text;
+   
+   });
+   }, false);
+  var showUserPicker = new mui.PopPicker();
+var userPicker = new mui.PopPicker();
+    
+   userPicker.setData(sdata);
+   var showUserPickerButton = document.getElementById('showUserPicker');
+   var userResult = document.getElementById('fid');
+   showUserPickerButton.addEventListener('tap', function(event) {
+   userPicker.show(function(items) {
+    userResult.value = items[0].value;
+    showUserPickerButton.innerText=items[0].text;
+   
+   });
+   }, false);
+ }
+ (function($, doc) {
+  $.init();
+  mui('.mui-scroll-wrapper').scroll();
+  $.ready(function() {
+   var _getParam = function(obj, param) {
+   return obj[param] || '';
+   }; 
+ document.getElementById('submit').addEventListener('tap', function() {  
+ if(document.getElementById('fid').value==0){mui.alert(l[lang]['请选择栏目']);return false;}
+ mui.post(www+'post/index.api',{content:document.getElementById('question').value,fid:document.getElementById('fid').value,gold:document.getElementById('gold').value,title:document.getElementById('title').value,imgv:document.getElementById('imgv').value,vs:document.getElementById('vidv').value,files:document.getElementById('files').value,YSV8_HEX:ysv8hex},function(data){
+ 
+if(data['error']){
+clearfrom();
+openurl('t.html?id='+data['id'],data['id']);
+}else{
+mui.alert(l[lang]['失败']);
+}
+ 
+ 
+ });
+ 
+
+
+ 
+   });
+   
+   setTimeout(function() {mui.post(www+'user/get.api',{type:'get',YSV8_HEX:ysv8hex},function(data){setdata(data);});}, 500);
+});
+})(mui, document); 
+ clearfrom=function (){
+document.getElementById('title').value='';
+document.getElementById('question').value='';
+document.getElementById('imgv').value='';
+document.getElementById('vidv').value='';
+document.getElementById('img').innerHTML ='';
+ }
+ </script>
+ </body>
+
+</html>

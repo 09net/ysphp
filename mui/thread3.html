@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>YSV8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/mui.min.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+<script src="js/angular.min.js"></script>
+</head>
+<body><header class="mui-bar mui-bar-nav">
+<form action="s.html" onSubmit="return sreachsub();">
+<div class="mui-row" id="indexheader">
+<div class="mui-col-sm-2 mui-col-xs-2" id="user"><a herf="setting.html" id="setting"><img src="images/mori.png" id="userimg" /></a></div><div class="mui-col-sm-2 mui-col-xs-2"><span id="usermess"></span></div>
+<div class="mui-col-sm-6 mui-col-xs-6">
+<div class="mui-input-row mui-search">
+<input type="search" class="mui-input-clear" placeholder="" id="sreach">
+</div>
+</div>
+<div class="mui-col-sm-2 mui-col-xs-2" id="post"><span class="mui-icon mui-icon-compose"></span></div>
+</div>
+</form>
+</header>
+<div class="mui-content">
+<div id="slider" class="mui-slider mui-fullscreen">
+<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+<div class="mui-scroll" id="group">
+</div>
+</div>
+<div class="mui-slider-group" style="padding-bottom:60px;"></div>
+</div>
+</div>
+<div class="rbar"><span class="mui-icon mui-icon-plusempty more"></span></div>
+<nav class="mui-bar mui-bar-tab" ng-app="myApp" ng-controller="mynav">
+<a class="mui-tab-item" herf="index.html" id="index"><span class="mui-icon mui-icon-home"></span><span class="mui-tab-label">{{l[lang]['首页']}}</span></a>
+<a class="mui-tab-item" herf="thread1.html" id="thread1"><span class="mui-icon mui-icon-camera"></span><span class="mui-tab-label">{{l[lang]['图片']}}</span></a>
+<a class="mui-tab-item" herf="thread2.html" id="thread2"><span class="mui-icon mui-icon-videocam"></span><span class="mui-tab-label mui-active">{{l[lang]['视频']}}</span></a>
+<a class="mui-tab-item active" herf="thread3.html" id="thread3"><span class="mui-icon mui-icon-download"></span><span class="mui-tab-label">{{l[lang]['附件']}}</span></a>
+<a class="mui-tab-item" herf="gold.html" id="gold"><span class="mui-icon mui-icon-extra mui-icon-extra-gold"></span><span class="mui-tab-label">{{l[lang]['金币']}}</span></a></nav>
+<script src="config.js"></script>
+<script src="js/mui.min.js"></script>
+<script src="js/mui.pullToRefresh.js"></script>
+<script src="js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript">
+type=2;
+posttype='forum_get';/*文章*/
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+</script>
+<script src="js/index.js"></script>
+</body>
+</html>

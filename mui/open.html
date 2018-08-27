@@ -1,0 +1,41 @@
+<!doctype html><html><head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>gold</title>
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+<link rel="stylesheet" type="text/css" href="css/alert.css" />
+<style>   #pullrefresh{ padding-bottom:60px;}.red{color:#FF0000}.green{color:#00FF00}.blue{color:#0000FF}.textl{text-align:left;}.textr{ text-align:right}.c{ text-align:center}.lh35{line-height:35px;}.bcw{background-color:#FFFFFF}#pullrefresh .mui-row{ margin:5px;}.h35{height:45px}</style>
+<script src="js/angular.min.js"></script>
+	</head>
+	<body  ng-app="myApp" ng-controller="mynav">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">{{l[lang]['加载']}}</h1>
+					<a class="mui-icon mui-icon-more mui-pull-right"></a>
+	</header>
+		
+<script src="js/mui.min.js"></script>
+<script src="js/sweet-alert.min.js"></script>
+<script src="config.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+ var id=getQueryString("q")
+mui.init({
+    subpages:[{
+      url:id,
+      id:'open',
+      styles:{
+        top:'45px',//mui标题栏默认高度为45px；
+        bottom:'0px'//默认为0px，可不定义；
+      }
+    }]
+  }); 			
+</script>
+	</body>
+
+</html>

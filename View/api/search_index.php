@@ -1,0 +1,1 @@
+<?php echo json_encode(['user_list'=>$user_list,'forum_list'=>$forum_list,'data'=>$data,'code'=>200]);?>

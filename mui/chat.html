@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+ <head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+ <title></title>
+ <link href="css/mui.min.css" rel="stylesheet" />
+ <link href="css/mui.imageviewer.css" rel="stylesheet" />
+ <link href="css/chat.css" rel="stylesheet" />
+ <link rel="stylesheet" type="text/css" href="css/alert.css" />
+ <script src="js/angular.min.js"></script>
+ </head>
+
+ <body contextmenu="return false;">
+ 
+ <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable" ng-app="myApp" ng-controller="mynav">
+ <!--菜单部分-->
+<aside id="offCanvasSide" class="mui-off-canvas-right">
+<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+<div class="mui-scroll">
+<div class="content">
+<p style="margin: 10px 15px;"><button id="offCanvasHide" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">{{l[lang]['关闭']}}</button></p>
+<div class="mui-row">
+<div class="mui-col-sm-6 mui-col-xs-6">
+<p style="margin: 10px 15px;"><button id="clear_mess" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">{{l[lang]['清空']}}</button></p></div>
+<div class="mui-col-sm-6 mui-col-xs-6"><p style="margin: 10px 15px;"><button id="setting" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">{{l[lang]['设置']}}</button></p></div></div>
+</div>
+<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted" id="myfriend">
+<div class="mui-table-view-cell" data-uid="0" data-ava="images/bell.png" data-user="{{l[lang]['系统']}}"><img class="mui-media-object mui-pull-left" src="images/bell.png" style="border-radius:30px; margin:5px;">{{l[lang]['系统']}}<span class="mui-icon mui-icon-checkmarkempty"></span><p></p></div>
+
+
+</ul>
+</div>
+</div>
+</aside>
+ <div class="mui-inner-wrap">
+ <header class="mui-bar mui-bar-nav">
+ <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+ <h1 class="mui-title" id="offCanvasShow" style="height:45px;">YSV8.COM</h1><span id="guanzhu"></span>
+ </header>
+ <div class="mui-content">
+ <div id='msg-list'>
+ </div>
+ </div>
+ <footer>
+ <div class="footer-center">
+ <textarea id='msg-text' type="text" class='input-text'></textarea>
+ </div>
+ <label for="" class="footer-right">
+ <span data-id='0' class="mui-btn mui-btn-primary">{{l[lang]['发送']}}</span><br><span data-id='clear' class="mui-btn mui-btn-danger">{{l[lang]['清空']}}</span>
+ </label>
+ 
+
+ 
+ 
+ 
+ </footer>
+ <!-- off-canvas backdrop -->
+ <div class="mui-off-canvas-backdrop"></div>
+ </div>
+ </div> 
+ <script src="js/mui.min.js"></script>
+ <script src="config.js"></script>
+ <script src="js/sweet-alert.min.js"></script>
+
+<script type="text/javascript">
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+</script>
+ <script src="js/chat.js"></script>
+ </body>
+
+</html>

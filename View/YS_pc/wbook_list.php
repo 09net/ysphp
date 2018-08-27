@@ -1,0 +1,3 @@
+<div class="item"><a href="https://{#NOW_LANG}.ysv8.com/u/{php echo urlencode($v['user']);}/weibook.html" target="_blank"><img src="{#bucketcdn}{$v.avatar}_150" width="50" height="50" data-uid="{$v.uid}" class="circle pull-left js-info" alt="{$v['user']}"></a><div class="middle text"><h4 class="title"><a href="https://{#NOW_LANG}.ysv8.com/weibook/{$v['id']}.html" >{$v.title}[<b>200</b>]</a></h4>
+<div class="meta"><a href="https://{#NOW_LANG}.ysv8.com/u/{php echo urlencode($v['user']);}/weibook.html" class="author" target="_blank">{$v.user}</a>·&nbsp;&nbsp;{php echo humandate($v['btime']);}&nbsp;&nbsp;{$v['posts']}{lag 回复}</div></div>
+</div>

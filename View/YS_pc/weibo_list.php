@@ -1,0 +1,4 @@
+<div class="item"><a href="https://{#NOW_LANG}.ysv8.com/u/{php echo urlencode($v['user']);}/weibo.html" target="_blank"><img src="{#bucketcdn}{$v.avatar}_150" width="50" height="50" data-uid="{$v.uid}" class="circle pull-left js-info" alt="{$v.user}"></a><div class="middle text"><h4 class="title" id="h4{$v['id']}">{$v.summary}</h4>{if $v['v']}<p><video src="{$v['v']}" controls="controls" poster="{$v['v']}?x-oss-process=video/snapshot,t_7000,f_jpg,m_fast"></video><br></p>
+{/if}{if $v['img']}<p><a href="https://{#NOW_LANG}.ysv8.com/w/{$v.id}.html">{php echoimg($v['img']);}</a></p>{/if} 
+<div class="meta"><a  href="https://{#NOW_LANG}.ysv8.com/w/{$v.id}.html">{php echo humandate($v['atime']);}</a><div class="pull-right weibor" data-id='{$v['id']}'><a class="comment2" href="https://{#NOW_LANG}.ysv8.com/w/{$v['id']}.html#maincontent" id="a{$v['id']}"><i class="fa fa-commenting-o"></i><span>{$v['posts']}</span></a></div>
+</div></div></div>

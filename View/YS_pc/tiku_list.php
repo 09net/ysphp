@@ -1,0 +1,2 @@
+<div class="item"><div class="tit">{$v['summary']}</div><div class="item_con"><div class="answ"><ul>{foreach $v['opitem'] as $v1}{if $v1['hashid']}<li class="options{if strpos($v['opbool'],$v1['hashid'])!==false} click{/if}">{$v1['con']}</li>{/if}{/foreach}</ul></div>
+<a href="https://{#NOW_LANG}.ysv8.com/ask/{$v['id']}.html" class="btn btn-primary btn-lg btn-block">{lag 解析}</a></div></div>

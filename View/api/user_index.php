@@ -1,0 +1,1 @@
+<?php echo json_encode(['data'=>$thread_data,'us2'=>$data,'code'=>200]);?>

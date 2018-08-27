@@ -1,0 +1,1 @@
+<div class="item"><div class="middle text"><h4 class="title"><a href="/f/{$v['id']}.html" >{$v['name']}</a></h4><amp-img src="{#bucketcdn}{$v['img']}" width="180" height="180" layout="fixed"></amp-img><div class="meta">{php echo humandate($v['btime']);}</div></div></div>

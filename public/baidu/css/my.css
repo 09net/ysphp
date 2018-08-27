@@ -1,0 +1,25 @@
+#ser_box div{height:38px; overflow:hidden; line-height:38px;text-align: center;}
+#ipt{
+	margin-top: 2px;
+	outline: 0;
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+
+#bot_box{
+	border: 1px solid #4C9ED9;
+	border-top: none;
+	display: none;
+	}
+	
+#bot_box ul li{
+		list-style: none;
+		line-height: 25px;
+		padding-left: 10px;
+		}
+#bot_box ul li:hover{
+		background: #BCBCBC;
+		}		
+.sel{
+	background:#BCBCBC;
+}

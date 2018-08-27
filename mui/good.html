@@ -1,0 +1,137 @@
+<!doctype html><html><head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>gold</title>
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+<link rel="stylesheet" type="text/css" href="css/alert.css" />
+ <script src="js/angular.min.js"></script>
+<style>.red{color:#FF0000}.green{color:#00FF00}.blue{color:#0000FF}.textl{text-align:left;}.textr{ text-align:right}.c{ text-align:center}.lh35{line-height:35px;}.bcw{background-color:#FFFFFF}#pullrefresh .mui-row{ margin:5px;}</style>
+	</head>
+	<body  ng-app="myApp" ng-controller="mynav">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">YSV8.com</h1>
+					<a class="mui-icon mui-icon-more mui-pull-right"></a>
+	</header>
+		<div class="mui-content bcw">
+<div class="mui-row lh35 bcw">
+<div class="mui-col-sm-6 mui-col-xs-6 textl p10">G&nbsp;<span class="red" id="user_gold">0</span><span class="mui-icon mui-icon-redo" id="salt"></span></div>
+<div class="mui-col-sm-6 mui-col-xs-6 textr p10">$&nbsp;<span class="red" id="user_vip">0</span><span class="mui-icon mui-icon-undo"  id="cz"></span></div>
+</div>
+<div class="mui-row lh35 bcw">
+<div class="mui-col-sm-6 mui-col-xs-6 textl p10"><button type="button" class="mui-btn mui-btn-danger" id="goldh">{{l[lang]['商城']}}</button></div>
+<div class="mui-col-sm-6 mui-col-xs-6 textr p10"><button type="button" class="mui-btn mui-btn-primary"  id="mx">{{l[lang]['明细']}}</button></div>
+</div>
+
+<div class="good_wap">
+<div id="disk_wap"></div>
+<div id="start_wap"><img id="startbtn" src="img/start2.png" style="cursor: pointer; transform: rotate(0deg);"></div>
+</div>		
+</div>
+<script src="js/mui.min.js"></script>
+<script src="js/sweet-alert.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jQueryRotate.2.2.js"></script>
+<script src="config.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp", []); 
+app.controller("mynav", function($scope) {
+$scope.lang=lang;
+$scope.l = l;
+});
+mui.init();
+
+$(function(){ 
+ $("#startbtn").click(function(){ 
+ lottery(); 
+ }); 
+}); function lottery(){ 
+mui.post(www+'open/gold_goodluck2',{YSV8_HEX:ysv8hex},function(json){
+ 
+ $("#startbtn").unbind('click').css("cursor","default"); 
+if(json.error==false){
+muialert(json);
+return false; 
+}
+ var a = json.angle; 
+ var p = json.prize; 
+ $("#startbtn").rotate({ 
+ duration:3000,
+ angle: 0, 
+ animateTo:1800+a,
+ easing: $.easing.easeOutSine, 
+ callback: function(){ 
+ $("#user_gold").text(json.gold);
+  $("#user_vip").text(json.vip);
+swal(l[lang]['恭喜']+'\n+'+p);
+ $("#startbtn").css("cursor","pointer").on("click",function(){
+ lottery();
+ }); 
+ return false; 
+ 
+ } 
+ });  
+ }); 
+} 
+
+
+
+
+
+(function($){
+var deceleration = mui.os.ios?0.003:0.0009;
+$('.mui-scroll-wrapper').scroll({
+bounce: false,
+indicators: true,
+deceleration:deceleration
+});
+$.ready(function() {
+mui(".mui-content").on('tap','#goldh',function(){
+var gethtml=openurl('gold.html','gold');
+});
+mui(".mui-content").on('tap','#mx',function(){
+var gethtml=openurl('mx.html','mx');
+});
+mui(".mui-content").on('tap','#cz',function(){
+var gethtml=openurl('cz.html','cz');
+});
+
+mui(".mui-content").on('tap','#salt',function(){/*卖*/
+gold =document.getElementById('user_gold').innerText;
+if(gold<10200){swal('error','G<10200','error'); return false;}
+swal({
+title: l[lang]['密码'],
+text: l[lang]['输入'],
+type: "input",
+inputType: "password",
+showCancelButton: true,
+closeOnConfirm: false,
+animation: "slide-from-top",
+confirmButtonText: l[lang]['确认'],
+cancelButtonText:l[lang]['取消'],
+inputPlaceholder: l[lang]['密码']
+},
+function(inputValue){
+if (inputValue === false) return false; 
+if (inputValue === "") {
+swal.showInputError(l[lang]['输入']);
+return false;}
+swal.close();
+$.post(www+'open/gold_salt2',{pw:inputValue,gold:10000,YSV8_HEX:ysv8hex},function(data){
+if(data.error==false){
+swal('error',data.info,'error');
+}else{
+document.getElementById('user_gold').innerText=data.gold;
+swal('success',data.info,'success');
+}
+});
+});
+});
+   
+});  
+})(mui);    			
+</script>
+	</body>
+
+</html>

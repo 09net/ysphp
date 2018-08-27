@@ -1,0 +1,1 @@
+<?php echo json_encode(['data'=>$data,'title'=>$title,'forum'=>$forum,'us'=>[],'bucketcdn'=>bucketcdn,'imgcdn'=>imgcdn,'code'=>200]);?>
