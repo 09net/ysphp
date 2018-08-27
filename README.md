@@ -26,7 +26,9 @@
 - cht.{顶级域名}  为繁体中文
 - en.{顶级域名}  为英文
 - 默认为12个语言区，如果您不需要开通这么多语言区请修改index.php
-
+``` php
+$langa=array('zh'=>['zh-hans','简体中文'],'cht'=>['zh-hant','繁體中文'],'en'=>['en','English'],'ja'=>['ja','日本の'],'ko'=>['ko','한국의'],'es'=>['es','español'],'ru'=>['ru','русский'],'ar'=>['ar','العربية'],'fr'=>['fr','français'],'hi'=>['hi','हिन्दी'],'pt'=>['pt','português'],'de'=>['de','Deutsch']);
+```
 
 ##ysphp配置
 请登录http://  您的域名 /admin/op  点击微信小程序，填写APPID与APPsercret点击【保存配置】
