@@ -33,16 +33,17 @@ $langa=array('zh'=>['zh-hans','简体中文'],'cht'=>['zh-hant','繁體中文'],
 ##上线后的优化
 - 上线后请编辑 ys/YS.php 文件将define('DEBUG', true); 修改成define('DEBUG', false);并在管理后台关闭右下角调试窗口，可以极大的提高网站速度 。
 
-###参数获取
-APPID与APPsercret在微信公众平台获取    
-
+###手机APP生成
+请用 hbuilder 将目录下的mui生成APP
+###微信小程序
+请下载[yswxapp](https://github.com/09net/ysphp)
 ###官方示例
 目前唯一的官方示例是：**内涵gif笑话**  请扫描下方二维码进行效果查看
   
 
 
 ## 关于收费
-**YSwxapp**免费给非商业用户使用，用于商业目的请[购买](http://zh.44api.com)才能继续使用。未购买一经发现将赔偿**100**倍购买费用。
+**YSphp**免费给非商业用户使用，用于商业目的请[购买](http://zh.44api.com)才能继续使用。未购买一经发现将赔偿**100**倍购买费用。
 ## 反馈与建议
 - 邮箱：<719048503@qq.com>
 - [ysphp官方论坛](http://zh.44api.com/f/12.html)
